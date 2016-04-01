@@ -168,9 +168,6 @@ def verify(name, content, *args):
     # send job verify2 to api
     sock = request('verify2', name, content, *args)
 
-    # store verifications
-    verifications = []
-
     # decode result into sane json
     resp = decode(sock.recv())
 
@@ -185,8 +182,8 @@ def verify(name, content, *args):
         else:
             result = 3
 
-        # add verification with id and result to list
-        verifications.append({'id': resp['result']['id'], 'result': result})
+        # yield verification with id and result
+        yield {'id': resp['result']['id'], 'result': result}
 
         # decode result into sane json
         resp = decode(sock.recv())
@@ -194,9 +191,6 @@ def verify(name, content, *args):
     # make sure job completed
     if resp['status'] != 'complete':
         raise ResolveAPIError(resp['errors'][0]['errors'])
-
-    # return verifications
-    return verifications
 
 if __name__ == '__main__':
     import os
@@ -226,6 +220,15 @@ if __name__ == '__main__':
         args.output.write(json.dumps(obj))
         args.output.write('\n')
 
+    def iter_write(objs):
+        for obj in objs:
+            # write json to output file with trailing newline
+            args.output.write(json.dumps(obj))
+            args.output.write('\n')
+
+            # flush data so caller can get it
+            args.output.flush()
+
     # decode command into function and output
     if args.command == 'compile':
         command = compile
@@ -235,7 +238,7 @@ if __name__ == '__main__':
         output = json_write
     elif args.command == 'verify':
         command = verify
-        output = json_write
+        output = iter_write
 
     try:
         # run given command with given output

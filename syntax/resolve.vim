@@ -119,10 +119,10 @@ syntax keywords resolveGeneralOperations
     \ Write_Line
 
 " Matching surrounded parameters
-syntax match resolveParameter "\(([^)]+)\)"
-syntax match resolveParameter "\[([^\]]+)]"
-syntax match resolveParameter "\{([^\]]+)}"
-syntax match resolveParameter "\<([^\]]+)>"
+" syntax match resolveParameter "\(([^)]+)\)"
+" syntax match resolveParameter "\[([^\]]+)]"
+" syntax match resolveParameter "\{([^\]]+)}"
+" syntax match resolveParameter "\<([^\]]+)>"
 
 " Matching Strings
 syntax region resolveString start=/"/ skip=/\\"/ end=/"/ contains=resolveInterpolatedWrapper
@@ -130,9 +130,9 @@ syntax region resolveInterpolatedWrapper start="\v\\\(\s*" end="\v\s*\)" contain
 syntax match resolveInterpolatedString "\v\w+(\(\))?" contained containedin=resolveInterpolatedWrapper
 
 " Matching Numbers
-syntax match resolveNumber "\v<\d+>"
-syntax match resolveNumber "\v<\d+\.\d+>"
-syntax match resolveNumber "\v<\d*\.?\d+([Ee]-?)?\d+>"
-syntax match resolveNumber "\v<0x\x+([Pp]-?)?\x+>"
-syntax match resolveNumber "\v<0b[01]+>"
-syntax match resolveNumber "\v<0o\o+>"
+" syntax match resolveNumber "\v<\d+>"
+" syntax match resolveNumber "\v<\d+\.\d+>"
+" syntax match resolveNumber "\v<\d*\.?\d+([Ee]-?)?\d+>"
+" syntax match resolveNumber "\v<0x\x+([Pp]-?)?\x+>"
+" syntax match resolveNumber "\v<0b[01]+>"
+" syntax match resolveNumber "\v<0o\o+>"

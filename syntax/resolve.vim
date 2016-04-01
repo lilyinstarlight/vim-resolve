@@ -1,5 +1,5 @@
-" Match language specific keywords
-syntax keywords resolveKeywords 
+" Match language specific keyword
+syntax keyword resolveKeywords 
     \ Array
     \ Concept
     \ Facility
@@ -47,7 +47,7 @@ syntax keywords resolveKeywords
     \ uses
     \ constraints
 
-syntax keywords resolveStringOperations
+syntax keyword resolveStringOperations
     \ Reverse
     \ Prt_Btwn
     \ DeString
@@ -56,7 +56,7 @@ syntax keywords resolveStringOperations
     \ Merger
     \ Length
 
-syntax keywords resolveMathTypes
+syntax keyword resolveMathTypes
 " Math Types
     \ Character
     \ Integer
@@ -65,7 +65,7 @@ syntax keywords resolveMathTypes
     \ Z
     \ B
 
-syntax keywords resolveMathOperators
+syntax keyword resolveMathOperators
     \ +
     \ -
     \ *
@@ -80,7 +80,7 @@ syntax keywords resolveMathOperators
     \ :=:
     \ **
 
-syntax keywords resolveIntegerOperations
+syntax keyword resolveIntegerOperations
     \ Divide
     \ Mod
     \ Rem
@@ -96,21 +96,21 @@ syntax keywords resolveIntegerOperations
     \ Product
     \ Power
 
-syntax keywords resolveCharacterOperations
+syntax keyword resolveCharacterOperations
     \ Char_to_Int
     \ Less
     \ Less_Or_Equal
     \ Greater_Or_Equal
     \ Greater
 
-syntax keywords resolveBooleanOperations
+syntax keyword resolveBooleanOperations
     \ True
     \ False
     \ And
     \ Or
     \ Not
 
-syntax keywords resolveGeneralOperations
+syntax keyword resolveGeneralOperations
     \ Are_Equal
     \ Are_Not_Equal
     \ Replica

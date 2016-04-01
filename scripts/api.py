@@ -7,7 +7,7 @@ import urllib.request
 import websocket
 
 # api endpoint
-endpoint = 'wss://resolve.cs.clemson.edu/teaching/Compiler'
+endpoint = 'resolve.cs.clemson.edu/teaching'
 
 # default information for resolve jobs
 package = 'Default_Package'
@@ -33,22 +33,8 @@ def decode_json(payload):
 
         # iterate over dictionary
         for key in payload.keys():
-            # store payload
-            element = payload[key]
-
-            if isinstance(element, str):
-                # decode strings
-                element = decode_xml(decode_url(element))
-
-                try:
-                    # load string as json
-                    element = json.loads(element)
-                except:
-                    # do not bother if it is not json
-                    pass
-
             # recursively decode elements into more json
-            decoded[key] = decode_json(element)
+            decoded[key] = decode_json(payload[key])
 
         # return decoded dictionary
         return decoded
@@ -57,32 +43,28 @@ def decode_json(payload):
         decoded = []
 
         # iterate over dictionary
-        for index in range(len(payload)):
-            # store payload
-            element = payload[index]
-
-            if isinstance(element, str):
-                # decode strings
-                element = decode_xml(decode_url(element))
-
-                try:
-                    # load string as json
-                    element = json.loads(element)
-                except:
-                    # do not bother if it is not json
-                    pass
-
+        for element in payload:
             # recursively decode elements into more json
             decoded.append(decode_json(element))
 
         # return decoded list
         return decoded
+    elif isinstance(payload, str):
+        # decode string
+        element = decode_xml(decode_url(payload))
+
+        try:
+            # try to load is at json
+            return decode_json(json.loads(element))
+        except:
+            # just return the plain string if that fails
+            return element
     else:
-        # return leaf elements
+        # return plain elements
         return payload
 
 def decode(payload):
-    # load json then decode values
+    # decode string as json
     return decode_json(json.loads(payload))
 
 def encode_url(string):
@@ -106,7 +88,7 @@ def encode_json(payload):
     return encoded
 
 def encode(payload):
-    # encode json then dump it
+    # encode as json
     return json.dumps(encode_json(payload))
 
 def request(job, name, content, package=package, project=project, parent=parent, endpoint=endpoint):
@@ -122,7 +104,7 @@ def request(job, name, content, package=package, project=project, parent=parent,
 
     # open websocket
     sock = websocket.WebSocket()
-    sock.connect('{}?job={}'.format(endpoint, job))
+    sock.connect('wss://{}/Compiler?job={}'.format(endpoint, job))
 
     # send job
     sock.send(encode(job_data))
@@ -132,9 +114,9 @@ def request(job, name, content, package=package, project=project, parent=parent,
 
     return sock
 
-def compile(name, content, *args):
+def compile(name, content, package=package, project=project, parent=parent, endpoint=endpoint):
     # send job buildJar to api
-    sock = request('buildJar', name, content, *args)
+    sock = request('buildJar', name, content, package, project, parent, endpoint)
 
     # decode result into sane json
     resp = decode(sock.recv())
@@ -144,15 +126,15 @@ def compile(name, content, *args):
         raise ResolveAPIError(resp['errors'][0]['errors'])
 
     # download jar file
-    with urllib.request.urlopen('https://resolve.cs.clemson.edu/teaching/download?job=download&name={}&dir={}'.format(resp['result']['jarName'], resp['result']['downloadDir'])) as response:
+    with urllib.request.urlopen('https://{}/download?job=download&name={}&dir={}'.format(endpoint, resp['result']['jarName'], resp['result']['downloadDir'])) as response:
         jar = response.read()
 
     # return jar bytes
     return jar
 
-def genvcs(name, content, *args):
+def genvcs(name, content, package=package, project=project, parent=parent, endpoint=endpoint):
     # send job genVCs to api
-    sock = request('genVCs', name, content, *args)
+    sock = request('genVCs', name, content, package, project, parent, endpoint)
 
     # decode result into sane json
     resp = decode(sock.recv())
@@ -164,9 +146,9 @@ def genvcs(name, content, *args):
     # return vcs
     return resp['result']
 
-def verify(name, content, *args):
+def verify(name, content, package=package, project=project, parent=parent, endpoint=endpoint):
     # send job verify2 to api
-    sock = request('verify2', name, content, *args)
+    sock = request('verify2', name, content, package, project, parent, endpoint)
 
     # decode result into sane json
     resp = decode(sock.recv())

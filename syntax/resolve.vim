@@ -17,7 +17,6 @@ syntax keyword resolveKeywords
     \ Facility
     \ Family
     \ If
-    \ Main
     \ Operation
     \ Procedure
     \ Realization

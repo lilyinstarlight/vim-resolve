@@ -1,0 +1,33 @@
+Increase indent after
+---------------------
+* Procedure
+* While
+* do (The tab is decreased for this then reincreased after)
+    Ex.)
+    ----------------
+    While
+        alskdja
+    do
+        sdkljsk
+* Operation
+* If
+* else (The tab is decreased for this then reincreased after)
+    Ex.)
+    ----------------
+    if
+        alskdja
+    else
+        sdkljsk
+* Realization
+* Type
+* Concept
+* convention
+* correspondence
+* initialization
+* Facility
+
+Decrease indent after
+---------------------
+* end
+
+Thought Double enter press should decrease indent as well

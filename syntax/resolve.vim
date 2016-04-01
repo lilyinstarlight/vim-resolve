@@ -57,7 +57,6 @@ syntax keyword resolveStringOperations
     \ Length
 
 syntax keyword resolveMathTypes
-" Math Types
     \ Character
     \ Integer
     \ Boolean

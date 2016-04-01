@@ -1,3 +1,15 @@
+" Highlighting
+highlight default link resolveBooleanOperations Keyword
+highlight default link resolveCharacterOperations Keyword
+highlight default link resolveGeneralOperations Keyword
+highlight default link resolveIntegerOperations Keyword
+highlight default link resolveInterpolatedString Delimiter
+highlight default link resolveKeywords Keyword
+highlight default link resolveMathOperators Operator
+highlight default link resolveMathTypes Type
+highlight default link resolveString String
+highlight default link resolveStringOperations Keyword
+
 " Match language specific keyword
 syntax keyword resolveKeywords 
     \ Array
@@ -48,21 +60,21 @@ syntax keyword resolveKeywords
     \ constraints
 
 syntax keyword resolveStringOperations
-    \ Reverse
-    \ Prt_Btwn
-    \ DeString
-    \ o
     \ Char_Str_for
-    \ Merger
+    \ DeString
     \ Length
+    \ Merger
+    \ Prt_Btwn
+    \ Reverse
+    \ o
 
 syntax keyword resolveMathTypes
-    \ Character
-    \ Integer
+    \ B
     \ Boolean
     \ Char_Str
+    \ Character
+    \ Integer
     \ Z
-    \ B
 
 syntax keyword resolveMathOperators
     \ +
@@ -80,40 +92,40 @@ syntax keyword resolveMathOperators
     \ **
 
 syntax keyword resolveIntegerOperations
-    \ Divide
-    \ Mod
-    \ Rem
-    \ Quotient
-    \ Div
-    \ Is_Zero
-    \ Is_Not_Zero
-    \ Increment
     \ Decrement
-    \ Sum
-    \ Negative
     \ Difference
-    \ Product
+    \ Div
+    \ Divide
+    \ Increment
+    \ Is_Not_Zero
+    \ Is_Zero
+    \ Mod
+    \ Negative
     \ Power
+    \ Product
+    \ Quotient
+    \ Rem
+    \ Sum
 
 syntax keyword resolveCharacterOperations
     \ Char_to_Int
+    \ Greater
+    \ Greater_Or_Equal
     \ Less
     \ Less_Or_Equal
-    \ Greater_Or_Equal
-    \ Greater
 
 syntax keyword resolveBooleanOperations
-    \ True
-    \ False
     \ And
-    \ Or
+    \ False
     \ Not
+    \ Or
+    \ True
 
 syntax keyword resolveGeneralOperations
     \ Are_Equal
     \ Are_Not_Equal
-    \ Replica
     \ Read
+    \ Replica
     \ Write
     \ Write_Line
 

@@ -14,27 +14,42 @@ highlight default link resolveStringOperations Keyword
 syntax keyword resolveKeywords 
     \ Array
     \ Concept
+    \ Convention
+    \ Def
+    \ Definition
     \ Facility
     \ Family
     \ If
+    \ Oper
     \ Operation
+    \ Proc
     \ Procedure
+    \ Pty
     \ Realization
     \ Type
     \ Var
+    \ Variable
+    \ Variables
+    \ Vars
     \ While
+    \ alt
     \ alters
     \ and
     \ by
     \ clears
+    \ clr
     \ constraint
+    \ constraints
     \ convention
     \ correspondence
     \ decreasing
+    \ def
+    \ definition
     \ do
     \ else
     \ end
     \ ensures
+    \ eval
     \ evaluates
     \ exemplar
     \ for
@@ -44,20 +59,26 @@ syntax keyword resolveKeywords
     \ mod
     \ modeled
     \ not
+    \ oper
+    \ operation
     \ or
     \ powerset
+    \ pres
     \ preserves
+    \ rea
     \ replaces
     \ represented
     \ requires
+    \ rest
     \ restores
+    \ rpl
     \ str
     \ then
     \ type
+    \ upd
     \ updates
     \ uses
-    \ constraints
-
+    
 syntax keyword resolveStringOperations
     \ Char_Str_for
     \ DeString

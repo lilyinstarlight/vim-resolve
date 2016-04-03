@@ -1,25 +1,136 @@
-" Highlighting
-highlight default link resolveBooleanOperations Keyword
-highlight default link resolveCharacterOperations Keyword
-highlight default link resolveGeneralOperations Keyword
-highlight default link resolveIntegerOperations Keyword
-highlight default link resolveInterpolatedString Delimiter
-highlight default link resolveKeywords Keyword
-highlight default link resolveMathOperators Operator
-highlight default link resolveMathTypes Type
-highlight default link resolveString String
-highlight default link resolveStringOperations Keyword
+" Vim syntax file
+" Language: RESOLVE
+" Maintainer: Foster McLane and Mackenzie Binns
+" Last Change: 2016-04-03
 
-" Match language specific keyword
-syntax keyword resolveKeywords 
+" guard for other syntaxes
+if exists("b:current_syntax")
+    finish
+endif
+let b:current_syntax="resolve"
+
+" comments
+syn region resolveBlockComment start="(\*" end="\*)"
+syn match resolveComment "--.*"
+
+" common
+syntax keyword resolveOperator
+    \ +
+    \ -
+    \ *
+    \ **
+    \ /
+    \ =
+    \ /=
+    \ <
+    \ <=
+    \ >
+    \ >=
+
+" math context
+syntax keyword resolveMathConstant
+    \ false
+    \ true
+
+syntax keyword resolveMathOperator
+    \ o
+
+syntax keyword resolveMathType
+    \ B
+    \ N
+    \ Z
+
+" strings
+syntax region resolveString start=/"/ skip=/\\"/ end=/"/
+
+" characters
+syntax match resolveCharacter "\v'%(.|\\')'"
+
+" numbers
+syntax match resolveNumber "\v<\d+>"
+syntax match resolveFloat "\v<\d+\.\d+>"
+
+" general
+syntax keyword resolveGeneralOperation
+    \ Are_Equal
+    \ Are_Not_Equal
+    \ Read
+    \ Replica
+    \ Write
+    \ Write_Line
+
+" strings
+syntax keyword resolveStringOperation
+    \ Char_Str_for
+    \ DeString
+    \ Length
+    \ Merger
+    \ Prt_Btwn
+    \ Reverse
+
+" characters
+syntax keyword resolveCharacterOperation
+    \ Char_to_Int
+    \ Greater
+    \ Greater_Or_Equal
+    \ Less
+    \ Less_Or_Equal
+
+" integers
+syntax keyword resolveIntegerOperation
+    \ Decrement
+    \ Difference
+    \ Div
+    \ Divide
+    \ Increment
+    \ Is_Not_Zero
+    \ Is_Zero
+    \ Mod
+    \ Negative
+    \ Power
+    \ Product
+    \ Quotient
+    \ Rem
+    \ Sum
+
+" booleans
+syntax keyword resolveBooleanOperation
+    \ And
+    \ False
+    \ Not
+    \ Or
+    \ True
+
+" conditionals
+syntax keyword resolveConditional
+    \ If
+    \ else
+    \ elseif
+    \ end
+
+" loops
+syntax keyword resolveLoop
+    \ While
+    \ do
+    \ end
+
+" operators
+syntax keyword resolveObjectOperator
+    \ =
+    \ /=
+    \ :=
+    \ :=:
+
+" keywords
+syntax keyword resolveKeyword
     \ Array
     \ Concept
     \ Convention
+    \ Correspondence
     \ Def
     \ Definition
     \ Facility
     \ Family
-    \ If
     \ Oper
     \ Operation
     \ Proc
@@ -31,7 +142,6 @@ syntax keyword resolveKeywords
     \ Variable
     \ Variables
     \ Vars
-    \ While
     \ alt
     \ alters
     \ and
@@ -40,14 +150,9 @@ syntax keyword resolveKeywords
     \ clr
     \ constraint
     \ constraints
-    \ convention
-    \ correspondence
     \ decreasing
     \ def
     \ definition
-    \ do
-    \ else
-    \ end
     \ ensures
     \ eval
     \ evaluates
@@ -78,92 +183,42 @@ syntax keyword resolveKeywords
     \ upd
     \ updates
     \ uses
-    
-syntax keyword resolveStringOperations
-    \ Char_Str_for
-    \ DeString
-    \ Length
-    \ Merger
-    \ Prt_Btwn
-    \ Reverse
-    \ o
 
-syntax keyword resolveMathTypes
-    \ B
+" types
+syntax keyword resolveBuiltinType
     \ Boolean
     \ Char_Str
     \ Character
     \ Integer
-    \ Z
 
-syntax keyword resolveMathOperators
-    \ +
-    \ -
-    \ *
-    \ /
-    \ =
-    \ /=
-    \ <
-    \ <=
-    \ >
-    \ >=
-    \ :=
-    \ :=:
-    \ **
+" set highlights
+highlight default link resolveBlockComment Comment
+highlight default link resolveComment Comment
 
-syntax keyword resolveIntegerOperations
-    \ Decrement
-    \ Difference
-    \ Div
-    \ Divide
-    \ Increment
-    \ Is_Not_Zero
-    \ Is_Zero
-    \ Mod
-    \ Negative
-    \ Power
-    \ Product
-    \ Quotient
-    \ Rem
-    \ Sum
+highlight default link resolveMathConstant Constant
 
-syntax keyword resolveCharacterOperations
-    \ Char_to_Int
-    \ Greater
-    \ Greater_Or_Equal
-    \ Less
-    \ Less_Or_Equal
+highlight default link resolveString String
 
-syntax keyword resolveBooleanOperations
-    \ And
-    \ False
-    \ Not
-    \ Or
-    \ True
+highlight default link resolveCharacter Character
 
-syntax keyword resolveGeneralOperations
-    \ Are_Equal
-    \ Are_Not_Equal
-    \ Read
-    \ Replica
-    \ Write
-    \ Write_Line
+highlight default link resolveNumber Number
+highlight default link resolveFloat Float
 
-" Matching surrounded parameters
-" syntax match resolveParameter "\(([^)]+)\)"
-" syntax match resolveParameter "\[([^\]]+)]"
-" syntax match resolveParameter "\{([^\]]+)}"
-" syntax match resolveParameter "\<([^\]]+)>"
+highlight default link resolveBooleanOperation Identifier
+highlight default link resolveCharacterOperation Identifier
+highlight default link resolveGeneralOperation Identifier
+highlight default link resolveIntegerOperation Identifier
+highlight default link resolveStringOperation Identifier
 
-" Matching Strings
-syntax region resolveString start=/"/ skip=/\\"/ end=/"/ contains=resolveInterpolatedWrapper
-syntax region resolveInterpolatedWrapper start="\v\\\(\s*" end="\v\s*\)" contained containedin=resolveString contains=resolveInterpolatedString
-syntax match resolveInterpolatedString "\v\w+(\(\))?" contained containedin=resolveInterpolatedWrapper
+highlight default link resolveConditional Conditional
 
-" Matching Numbers
-" syntax match resolveNumber "\v<\d+>"
-" syntax match resolveNumber "\v<\d+\.\d+>"
-" syntax match resolveNumber "\v<\d*\.?\d+([Ee]-?)?\d+>"
-" syntax match resolveNumber "\v<0x\x+([Pp]-?)?\x+>"
-" syntax match resolveNumber "\v<0b[01]+>"
-" syntax match resolveNumber "\v<0o\o+>"
+highlight default link resolveLoop Repeat
+
+highlight default link resolveOperator Operator
+highlight default link resolveMathOperator Operator
+highlight default link resolveObjectOperator Operator
+
+highlight default link resolveKeyword Keyword
+
+highlight default link resolveBuiltinType Type
+highlight default link resolveMathType Type

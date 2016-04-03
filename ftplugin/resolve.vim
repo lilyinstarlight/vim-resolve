@@ -4,13 +4,13 @@
 " Last Change: 2016-04-03
 
 " guard against multiple ftplugins
-if exists( 'b:did_ftplugin' )
+if exists('b:did_ftplugin')
    finish
 endif
-let b:did_ftplugin = 1
+let b:did_ftplugin=1
 
 " save cpoptions
-let s:cpoptions_save = &cpoptions
+let s:cpoptions_save=&cpoptions
 set cpoptions&vim
 
 " tabbing settings
@@ -28,5 +28,5 @@ setlocal formatoptions-=t
 setlocal formatoptions+=croql
 
 " restore cpoptions
-let &cpoptions = s:cpoptions_save
+let &cpoptions=s:cpoptions_save
 unlet s:cpoptions_save

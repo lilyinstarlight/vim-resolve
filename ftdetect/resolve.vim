@@ -1,2 +1,2 @@
-" Identifying file types for resolve files
+" identify resolve files by the .resolve extension
 autocmd BufNewFile,BufRead *.resolve setfiletype resolve

@@ -33,12 +33,12 @@ function! GetResolveIndent()
 	let ind=indent(pnum)
 
 	" if previous line contained a special set of keywords
-	if pline =~ '\v^\s*<%(Concept|Convention|Correspondance|Facility|If|Initialization|Operation|Procedure|Realization|Type|While)>'
+	if pline =~ '\v\c^\s*<%(Concept|Convention|Correspondance|Facility|If|Initialization|Operation|Procedure|Realization|Type|While)>'
 		" increase the indent
 		let ind+=&sw
 	endif
 	" if the current line contains a special set of keywords
-	if line =~ '\v^\s*<%(do|else|end)>'
+	if line =~ '\v\c^\s*<%(do|else|end)>'
 		" decrease the indent
 		let ind-=&sw
 	endif

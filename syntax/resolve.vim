@@ -4,14 +4,14 @@
 " Last Change: 2016-04-03
 
 " guard for other syntaxes
-if exists("b:current_syntax")
+if exists('b:current_syntax')
   finish
 endif
-let b:current_syntax="resolve"
+let b:current_syntax='resolve'
 
 " comments
-syn region resolveBlockComment start="(\*" end="\*)"
-syn match resolveComment "\v--.*"
+syn region resolveBlockComment start='(\*' end='\*)'
+syn match resolveComment '\v--.*'
 
 " common
 syntax keyword resolveOperator
@@ -47,8 +47,8 @@ syntax region resolveString start=/"/ skip=/\\"/ end=/"/
 syntax match resolveCharacter "\v'%(.|\\')'"
 
 " numbers
-syntax match resolveNumber "\v<\d+>"
-syntax match resolveFloat "\v<\d+\.\d+>"
+syntax match resolveNumber '\v<\d+>'
+syntax match resolveFloat '\v<\d+\.\d+>'
 
 " general
 syntax keyword resolveGeneralOperation

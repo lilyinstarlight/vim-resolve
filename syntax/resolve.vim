@@ -5,40 +5,40 @@
 
 " guard for other syntaxes
 if exists("b:current_syntax")
-    finish
+  finish
 endif
 let b:current_syntax="resolve"
 
 " comments
 syn region resolveBlockComment start="(\*" end="\*)"
-syn match resolveComment "--.*"
+syn match resolveComment "\v--.*"
 
 " common
 syntax keyword resolveOperator
-    \ +
-    \ -
-    \ *
-    \ **
-    \ /
-    \ =
-    \ /=
-    \ <
-    \ <=
-    \ >
-    \ >=
+      \ +
+      \ -
+      \ *
+      \ **
+      \ /
+      \ =
+      \ /=
+      \ <
+      \ <=
+      \ >
+      \ >=
 
 " math context
 syntax keyword resolveMathConstant
-    \ false
-    \ true
+      \ false
+      \ true
 
 syntax keyword resolveMathOperator
-    \ o
+      \ o
 
 syntax keyword resolveMathType
-    \ B
-    \ N
-    \ Z
+      \ B
+      \ N
+      \ Z
 
 " strings
 syntax region resolveString start=/"/ skip=/\\"/ end=/"/
@@ -52,144 +52,148 @@ syntax match resolveFloat "\v<\d+\.\d+>"
 
 " general
 syntax keyword resolveGeneralOperation
-    \ Are_Equal
-    \ Are_Not_Equal
-    \ Read
-    \ Replica
-    \ Write
-    \ Write_Line
+      \ Are_Equal
+      \ Are_Not_Equal
+      \ Read
+      \ Replica
+      \ Write
+      \ Write_Line
 
 " strings
 syntax keyword resolveStringOperation
-    \ Char_Str_for
-    \ DeString
-    \ Length
-    \ Merger
-    \ Prt_Btwn
-    \ Reverse
+      \ Char_Str_for
+      \ DeString
+      \ Length
+      \ Merger
+      \ Prt_Btwn
+      \ Reverse
 
 " characters
 syntax keyword resolveCharacterOperation
-    \ Char_to_Int
-    \ Greater
-    \ Greater_Or_Equal
-    \ Less
-    \ Less_Or_Equal
+      \ Char_to_Int
+      \ Greater
+      \ Greater_Or_Equal
+      \ Less
+      \ Less_Or_Equal
 
 " integers
 syntax keyword resolveIntegerOperation
-    \ Decrement
-    \ Difference
-    \ Div
-    \ Divide
-    \ Increment
-    \ Is_Not_Zero
-    \ Is_Zero
-    \ Mod
-    \ Negative
-    \ Power
-    \ Product
-    \ Quotient
-    \ Rem
-    \ Sum
+      \ Decrement
+      \ Difference
+      \ Div
+      \ Divide
+      \ Increment
+      \ Is_Not_Zero
+      \ Is_Zero
+      \ Mod
+      \ Negative
+      \ Power
+      \ Product
+      \ Quotient
+      \ Rem
+      \ Sum
 
 " booleans
 syntax keyword resolveBooleanOperation
-    \ And
-    \ False
-    \ Not
-    \ Or
-    \ True
+      \ And
+      \ False
+      \ Not
+      \ Or
+      \ True
 
 " conditionals
 syntax keyword resolveConditional
-    \ If
-    \ else
-    \ elseif
-    \ end
+      \ If
+      \ else
+      \ elseif
+      \ end
 
 " loops
 syntax keyword resolveLoop
-    \ While
-    \ do
-    \ end
+      \ While
+      \ do
+      \ end
 
 " operators
 syntax keyword resolveObjectOperator
-    \ =
-    \ /=
-    \ :=
-    \ :=:
+      \ =
+      \ /=
+      \ :=
+      \ :=:
 
 " keywords
 syntax keyword resolveKeyword
-    \ Array
-    \ Concept
-    \ Convention
-    \ Correspondence
-    \ Def
-    \ Definition
-    \ Facility
-    \ Family
-    \ Oper
-    \ Operation
-    \ Proc
-    \ Procedure
-    \ Pty
-    \ Realization
-    \ Type
-    \ Var
-    \ Variable
-    \ Variables
-    \ Vars
-    \ alt
-    \ alters
-    \ and
-    \ by
-    \ clears
-    \ clr
-    \ constraint
-    \ constraints
-    \ decreasing
-    \ def
-    \ definition
-    \ ensures
-    \ eval
-    \ evaluates
-    \ exemplar
-    \ for
-    \ initialization
-    \ is
-    \ maintaining
-    \ mod
-    \ modeled
-    \ not
-    \ oper
-    \ operation
-    \ or
-    \ powerset
-    \ pres
-    \ preserves
-    \ rea
-    \ replaces
-    \ represented
-    \ requires
-    \ rest
-    \ restores
-    \ rpl
-    \ str
-    \ then
-    \ type
-    \ upd
-    \ updates
-    \ uses
+      \ Array
+      \ Concept
+      \ Convention
+      \ Correspondence
+      \ Def
+      \ Definition
+      \ Facility
+      \ Family
+      \ Oper
+      \ Operation
+      \ Proc
+      \ Procedure
+      \ Property
+      \ Pty
+      \ Realization
+      \ Type
+      \ Var
+      \ Variable
+      \ Variables
+      \ Vars
+      \ alt
+      \ alters
+      \ and
+      \ by
+      \ clears
+      \ clr
+      \ constraint
+      \ constraints
+      \ decreasing
+      \ def
+      \ definition
+      \ enhanced
+      \ ensures
+      \ eval
+      \ evaluates
+      \ exemplar
+      \ for
+      \ finalization
+      \ initialization
+      \ is
+      \ maintaining
+      \ mod
+      \ modeled
+      \ not
+      \ oper
+      \ operation
+      \ or
+      \ powerset
+      \ pres
+      \ preserves
+      \ rea
+      \ realized
+      \ replaces
+      \ represented
+      \ requires
+      \ rest
+      \ restores
+      \ rpl
+      \ str
+      \ then
+      \ type
+      \ upd
+      \ updates
+      \ uses
 
 " types
 syntax keyword resolveBuiltinType
-    \ Boolean
-    \ Char_Str
-    \ Character
-    \ Integer
+      \ Boolean
+      \ Char_Str
+      \ Character
+      \ Integer
 
 " set highlights
 highlight default link resolveBlockComment Comment

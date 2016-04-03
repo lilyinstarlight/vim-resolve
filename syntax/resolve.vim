@@ -125,6 +125,8 @@ syntax keyword resolveObjectOperator
 syntax keyword resolveKeyword
       \ Array
       \ Concept
+      \ Constraint
+      \ Constraints
       \ Convention
       \ Correspondence
       \ Def
@@ -151,6 +153,8 @@ syntax keyword resolveKeyword
       \ clr
       \ constraint
       \ constraints
+      \ convention
+      \ correspondence
       \ decreasing
       \ def
       \ definition
@@ -162,6 +166,7 @@ syntax keyword resolveKeyword
       \ for
       \ finalization
       \ initialization
+      \ if
       \ is
       \ maintaining
       \ mod
@@ -175,6 +180,7 @@ syntax keyword resolveKeyword
       \ preserves
       \ rea
       \ realized
+      \ reassigns
       \ replaces
       \ represented
       \ requires

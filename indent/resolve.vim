@@ -15,7 +15,7 @@ setlocal indentkeys+=0=ensures,0=exemplar,0=finalization,0=initialization,0=requ
 setlocal indentkeys-=0{,0},0),:,0#,e
 setlocal nosmartindent
 
-let s:declaration='\v\c^\s*<%(Concept|Convention|Correspondance|Facility|Proc|Procedure|Realization|Type)>'
+let s:declaration='\v\c^\s*<%(Concept|Convention|Correspondance|Def|Definition|Facility|Proc|Procedure|Realization|Type)>'
 let s:is='\v\c<is>'
 let s:modifier='\v\c^\s*<%(enhanced|ensures|exemplar|finalization|initialization|realized|requires|updates|uses)>'
 let s:conditional='\v\c^\s*<%(do|else|end)>'

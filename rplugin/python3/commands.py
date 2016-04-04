@@ -23,7 +23,10 @@ class ResolvePlugin(object):
 
         name, content = ResolvePlugin.get_args(self.nvim.current.buffer)
 
-        jar = resolve.compile(name, content)
+        try:
+            jar = resolve.compile(name, content)
+        except resolve.ResolveAPIError as e:
+            pass
 
         # run jar
 
@@ -35,10 +38,16 @@ class ResolvePlugin(object):
 
         name, content = ResolvePlugin.get_args(self.nvim.current.buffer)
 
-        vcs = resolve.genvcs(name, content)
+        try:
+            vcs = resolve.genvcs(name, content)
+        except resolve.ResolveAPIError as e:
+            pass
 
         # show vcs
 
-        for verification in resolve.verify(name, content):
-            # update vcs
+        try:
+            for verification in resolve.verify(name, content):
+                # update vcs
+                pass
+        except resolve.ResolveAPIError as e:
             pass

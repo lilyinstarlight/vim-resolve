@@ -27,12 +27,18 @@ setlocal commentstring=--%s
 setlocal formatoptions-=t
 setlocal formatoptions+=croql
 
-" remember async file
-let s:asyncpy=expand('<sfile>:p:h:h') . '/scripts/async.py'
+" remember scripts directory
+let s:scripts=expand('<sfile>:p:h:h') . '/scripts'
+
+" add scripts directory to python import path
+py3 << EOF
+import sys, vim
+sys.path.append(vim.eval('s:scripts'))
+EOF
 
 " call python script to asynchronously update vim
 function! s:async(command)
-  execute 'py3file ' . s:asyncpy
+  execute 'py3file ' . s:scripts . '/async.py'
 endfunction
 
 " define compile and verify commands

@@ -27,6 +27,18 @@ setlocal commentstring=--%s
 setlocal formatoptions-=t
 setlocal formatoptions+=croql
 
+" remember async file
+let s:asyncpy=expand('<sfile>:p:h:h') . '/scripts/async.py'
+
+" call python script to asynchronously update vim
+function! s:async(command)
+  execute 'py3file ' . s:asyncpy
+endfunction
+
+" define compile and verify commands
+command! ResolveCompile call s:async('compile')
+command! ResolveVerify call s:async('verify')
+
 " restore cpoptions
 let &cpoptions=s:cpoptions_save
 unlet s:cpoptions_save

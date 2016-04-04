@@ -1,7 +1,7 @@
 " Vim filetype plugin file
 " Language: RESOLVE
 " Maintainer: Foster McLane and Mackenzie Binns
-" Last Change: 2016-04-03
+" Last Change: 2016-04-04
 
 " guard against multiple ftplugins
 if exists('b:did_ftplugin')
@@ -26,24 +26,6 @@ setlocal commentstring=--%s
 " formatting options
 setlocal formatoptions-=t
 setlocal formatoptions+=croql
-
-" remember scripts directory
-let s:scripts=expand('<sfile>:p:h:h') . '/scripts'
-
-" add scripts directory to python import path
-py3 << EOF
-import sys, vim
-sys.path.append(vim.eval('s:scripts'))
-EOF
-
-" call python script to asynchronously update vim
-function! s:async(command)
-  execute 'py3file ' . s:scripts . '/async.py'
-endfunction
-
-" define compile and verify commands
-command! ResolveCompile call s:async('compile')
-command! ResolveVerify call s:async('verify')
 
 " restore cpoptions
 let &cpoptions=s:cpoptions_save

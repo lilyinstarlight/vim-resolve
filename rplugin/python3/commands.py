@@ -21,7 +21,7 @@ class ResolvePlugin(object):
             self.nvim.out_write('You must set a buffer name (e.g. save it to a file) to compile a resolve program.')
             return
 
-        name, content = get_args(self.nvim.current.buffer)
+        name, content = ResolvePlugin.get_args(self.nvim.current.buffer)
 
         jar = resolve.compile(name, content)
 
@@ -33,7 +33,7 @@ class ResolvePlugin(object):
             self.nvim.out_write('You must set a buffer name (e.g. save it to a file) to verify a resolve program.')
             return
 
-        name, content = get_args(self.nvim.current.buffer)
+        name, content = ResolvePlugin.get_args(self.nvim.current.buffer)
 
         vcs = resolve.genvcs(name, content)
 

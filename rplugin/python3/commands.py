@@ -13,7 +13,7 @@ class ResolvePlugin(object):
         self.nvim = nvim
 
     def get_args(buffer):
-        return ospath.splitext(os.path.basename(buffer.name))[0], b'\n'.join(nvim.current.buffer)
+        return os.path.splitext(os.path.basename(buffer.name))[0], b'\n'.join(nvim.current.buffer)
 
     @neovim.command('ResolveCompile')
     def compile(self):

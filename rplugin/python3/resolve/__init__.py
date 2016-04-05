@@ -1,1 +1,1 @@
-from .api import ResolveAPIError, compile, genvcs, verify
+from .api import ResolveAPIError, ResolveCompilerError, compile, genvcs, verify

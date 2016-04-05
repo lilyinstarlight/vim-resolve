@@ -26,7 +26,11 @@ class ResolvePlugin(object):
         try:
             jar = resolve.compile(name, content)
         except resolve.ResolveAPIError as e:
-            pass
+            self.nvim.out_write('Received error from resolve api: {}'.format(e))
+            return
+        except resolve.ResolveCompilerError as e:
+            self.nvim.out_write('Received error from resolve compiler: {}'.format(e))
+            return
 
         # run jar
 
@@ -41,7 +45,11 @@ class ResolvePlugin(object):
         try:
             vcs = resolve.genvcs(name, content)
         except resolve.ResolveAPIError as e:
-            pass
+            self.nvim.out_write('Received error from resolve api: {}'.format(e))
+            return
+        except resolve.ResolveCompilerError as e:
+            self.nvim.out_write('Received error from resolve compiler: {}'.format(e))
+            return
 
         # show vcs
 
@@ -50,4 +58,8 @@ class ResolvePlugin(object):
                 # update vcs
                 pass
         except resolve.ResolveAPIError as e:
-            pass
+            self.nvim.out_write('Received error from resolve api: {}'.format(e))
+            return
+        except resolve.ResolveCompilerError as e:
+            self.nvim.out_write('Received error from resolve compiler: {}'.format(e))
+            return

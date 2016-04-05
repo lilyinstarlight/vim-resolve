@@ -14,6 +14,10 @@ project = 'Default_Project'
 parent = 'undefined'
 
 class ResolveAPIError(RuntimeError):
+    # general resolve api error (e.g. api communication errors)
+    pass
+
+class ResolveCompilerError(RuntimeError):
     # general resolve error (e.g. syntax errors)
     pass
 
@@ -122,7 +126,10 @@ def compile(name, content, package=package, project=project, parent=parent, endp
 
     # make sure job completed
     if resp['status'] != 'complete':
-        raise ResolveAPIError(resp['errors'][0]['errors'])
+        try:
+            raise ResolveCompilerError(resp['errors'][0]['errors'])
+        except KeyError:
+            raise ResolveAPIError(resp['bugs'][0]['bugs'])
 
     # download jar file
     with urllib.request.urlopen('https://{}/download?job=download&name={}&dir={}'.format(endpoint, resp['result']['jarName'], resp['result']['downloadDir'])) as response:
@@ -140,7 +147,10 @@ def genvcs(name, content, package=package, project=project, parent=parent, endpo
 
     # make sure job completed
     if resp['status'] != 'complete':
-        raise ResolveAPIError(resp['errors'][0]['errors'])
+        try:
+            raise ResolveCompilerError(resp['errors'][0]['errors'])
+        except KeyError:
+            raise ResolveAPIError(resp['bugs'][0]['bugs'])
 
     # return vcs
     return resp['result']
@@ -171,7 +181,10 @@ def verify(name, content, package=package, project=project, parent=parent, endpo
 
     # make sure job completed
     if resp['status'] != 'complete':
-        raise ResolveAPIError(resp['errors'][0]['errors'])
+        try:
+            raise ResolveCompilerError(resp['errors'][0]['errors'])
+        except KeyError:
+            raise ResolveAPIError(resp['bugs'][0]['bugs'])
 
 if __name__ == '__main__':
     import os

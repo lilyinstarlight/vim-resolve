@@ -131,6 +131,7 @@ syntax keyword resolveKeyword
       \ Correspondence
       \ Def
       \ Definition
+      \ Enhancement
       \ Facility
       \ Family
       \ Oper

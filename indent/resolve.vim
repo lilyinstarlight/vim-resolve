@@ -1,7 +1,7 @@
 " Vim indent file
 " Language: RESOLVE
 " Maintainer: Foster McLane and Mackenzie Binns
-" Last Change: 2016-04-03
+" Last Change: 2016-04-09
 
 " guard against multiple indents
 if exists('b:did_indent')
@@ -17,7 +17,7 @@ setlocal nosmartindent
 
 let s:declaration='\v\c^\s*<%(Concept|Convention|Correspondance|Def|Definition|Facility|Proc|Procedure|Realization|Type)>'
 let s:is='\v\c<is>'
-let s:modifier='\v\c^\s*<%(enhanced|ensures|exemplar|finalization|initialization|realized|requires|updates|uses)>'
+let s:modifier='\v\c^\s*<%(decreasing|enhanced|ensures|exemplar|finalization|initialization|maintaining|realized|requires|updates|uses)>'
 let s:conditional='\v\c^\s*<%(do|else|end)>'
 
 " indent function

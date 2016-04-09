@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: RESOLVE
 " Maintainer: Foster McLane and Mackenzie Binns
-" Last Change: 2016-04-03
+" Last Change: 2016-04-09
 
 " guard for other syntaxes
 if exists('b:current_syntax')
@@ -34,6 +34,13 @@ syntax keyword resolveMathConstant
 
 syntax keyword resolveMathOperator
       \ o
+      \ #
+      \ |
+
+syntax keyword resolveMathOperation
+      \ DeString
+      \ Prt_Btwn
+      \ Reverse
 
 syntax keyword resolveMathType
       \ B
@@ -50,26 +57,20 @@ syntax match resolveCharacter "\v'%(.|\\')'"
 syntax match resolveNumber '\v<\d+>'
 syntax match resolveFloat '\v<\d+\.\d+>'
 
-" general
-syntax keyword resolveGeneralOperation
+" strings
+syntax keyword resolveStringOperation
       \ Are_Equal
       \ Are_Not_Equal
+      \ Length
+      \ Merger
       \ Read
       \ Replica
       \ Write
       \ Write_Line
 
-" strings
-syntax keyword resolveStringOperation
-      \ Char_Str_for
-      \ DeString
-      \ Length
-      \ Merger
-      \ Prt_Btwn
-      \ Reverse
-
 " characters
 syntax keyword resolveCharacterOperation
+      \ Char_Str_for
       \ Char_to_Int
       \ Greater
       \ Greater_Or_Equal
@@ -217,8 +218,8 @@ highlight default link resolveFloat Float
 
 highlight default link resolveBooleanOperation Identifier
 highlight default link resolveCharacterOperation Identifier
-highlight default link resolveGeneralOperation Identifier
 highlight default link resolveIntegerOperation Identifier
+highlight default link resolveMathOperation Identifier
 highlight default link resolveStringOperation Identifier
 
 highlight default link resolveConditional Conditional

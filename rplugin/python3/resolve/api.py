@@ -94,7 +94,7 @@ def encode(payload):
     # encode as json
     return json.dumps(encode_json(payload))
 
-def request(job, name, content, package=package, project=project, parent=parent, endpoint=endpoint):
+def request(job, name, type, content, package=package, project=project, parent=parent, endpoint=endpoint):
     # create job data
     job_data = {
             'name': name,
@@ -102,7 +102,7 @@ def request(job, name, content, package=package, project=project, parent=parent,
             'project': project,
             'content': content,
             'parent': parent,
-            'type': 'f'
+            'type': type
     }
 
     # open websocket
@@ -117,9 +117,9 @@ def request(job, name, content, package=package, project=project, parent=parent,
 
     return sock
 
-def compile(name, content, package=package, project=project, parent=parent, endpoint=endpoint):
+def compile(name, type, content, package=package, project=project, parent=parent, endpoint=endpoint):
     # send job buildJar to api
-    sock = request('buildJar', name, content, package, project, parent, endpoint)
+    sock = request('buildJar', name, type, content, package, project, parent, endpoint)
 
     # decode result into sane json
     resp = decode(sock.recv())
@@ -138,9 +138,9 @@ def compile(name, content, package=package, project=project, parent=parent, endp
     # return jar bytes
     return jar
 
-def genvcs(name, content, package=package, project=project, parent=parent, endpoint=endpoint):
+def genvcs(name, type, content, package=package, project=project, parent=parent, endpoint=endpoint):
     # send job genVCs to api
-    sock = request('genVCs', name, content, package, project, parent, endpoint)
+    sock = request('genVCs', name, type, content, package, project, parent, endpoint)
 
     # decode result into sane json
     resp = decode(sock.recv())
@@ -155,9 +155,9 @@ def genvcs(name, content, package=package, project=project, parent=parent, endpo
     # return vcs
     return resp['result']
 
-def verify(name, content, package=package, project=project, parent=parent, endpoint=endpoint):
+def verify(name, type, content, package=package, project=project, parent=parent, endpoint=endpoint):
     # send job verify2 to api
-    sock = request('verify2', name, content, package, project, parent, endpoint)
+    sock = request('verify2', name, type, content, package, project, parent, endpoint)
 
     # decode result into sane json
     resp = decode(sock.recv())
@@ -189,6 +189,8 @@ def verify(name, content, package=package, project=project, parent=parent, endpo
 if __name__ == '__main__':
     import os
     import os.path
+
+    import re
 
     import sys
 
@@ -234,10 +236,31 @@ if __name__ == '__main__':
         command = verify
         output = iter_write
 
+    # get data about resolve file
+    name = os.path.splitext(os.path.basename(args.file.name))[0]
+    content = args.file.read()
+
+    # determine file type by checking for resolve type
+    if re.search('^\s*Realization', content, re.MULTILINE):
+        if command not in ['genvcs', 'verify']:
+            sys.stderr.write('resolve.api: realizations only support \'genvcs\' and \'verify\'\n')
+            sys.exit(2)
+
+        type = 'r'
+    elif re.search('^\s*Facility', content, re.MULTILINE):
+        type = 'f'
+    else:
+        sys.stderr.write('resolve.api: could not determine resolve file type\n')
+        sys.exit(1)
+
     try:
         # run given command with given output
-        output(command(os.path.splitext(os.path.basename(args.file.name))[0], args.file.read(), args.package, args.project, args.parent, args.endpoint))
+        output(command(name, type, content, args.package, args.project, args.parent, args.endpoint))
     except ResolveAPIError as error:
         # output errors
         print(json.dumps(error.args))
-        sys.exit(1)
+        sys.exit(3)
+    except ResolveCompilerError as error:
+        # output errors
+        print(json.dumps(error.args))
+        sys.exit(4)

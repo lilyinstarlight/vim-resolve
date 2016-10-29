@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: RESOLVE
 " Maintainer: Foster McLane and Mackenzie Binns
-" Last Change: 2016-04-09
+" Last Change: 2016-10-29
 
 " guard for other syntaxes
 if exists('b:current_syntax')
@@ -113,7 +113,6 @@ syntax keyword resolveConditional
 syntax keyword resolveLoop
       \ While
       \ do
-      \ end
 
 " operators
 syntax keyword resolveObjectOperator
@@ -122,27 +121,43 @@ syntax keyword resolveObjectOperator
       \ :=
       \ :=:
 
-" keywords
-syntax keyword resolveKeyword
-      \ Array
+" delcarations
+syntax keyword resolveDeclaration
       \ Concept
-      \ Constraint
-      \ Constraints
       \ Convention
       \ Correspondence
       \ Def
       \ Definition
-      \ Enhancement
       \ Facility
+      \ Proc
+      \ Procedure
+      \ Realization
+      \ Type
+
+" modifiers
+syntax keyword resolveModifier
+      \ changing
+      \ decreasing
+      \ ensures
+      \ exemplar
+      \ finalization
+      \ initialization
+      \ maintaining
+      \ realized
+      \ requires
+      \ updates
+
+" general keywords
+syntax keyword resolveKeyword
+      \ Array
+      \ Constraint
+      \ Constraints
+      \ Enhancement
       \ Family
       \ Oper
       \ Operation
-      \ Proc
-      \ Procedure
       \ Property
       \ Pty
-      \ Realization
-      \ Type
       \ Var
       \ Variable
       \ Variables
@@ -157,20 +172,14 @@ syntax keyword resolveKeyword
       \ constraints
       \ convention
       \ correspondence
-      \ decreasing
       \ def
       \ definition
       \ enhanced
-      \ ensures
       \ eval
       \ evaluates
-      \ exemplar
       \ for
-      \ finalization
-      \ initialization
       \ if
       \ is
-      \ maintaining
       \ mod
       \ modeled
       \ not
@@ -181,11 +190,9 @@ syntax keyword resolveKeyword
       \ pres
       \ preserves
       \ rea
-      \ realized
       \ reassigns
       \ replaces
       \ represented
-      \ requires
       \ rest
       \ restores
       \ rpl
@@ -193,7 +200,6 @@ syntax keyword resolveKeyword
       \ then
       \ type
       \ upd
-      \ updates
       \ uses
 
 " types
@@ -230,6 +236,8 @@ highlight default link resolveOperator Operator
 highlight default link resolveMathOperator Operator
 highlight default link resolveObjectOperator Operator
 
+highlight default link resolveDeclaration Keyword
+highlight default link resolveModifier Keyword
 highlight default link resolveKeyword Keyword
 
 highlight default link resolveBuiltinType Type

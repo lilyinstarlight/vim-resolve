@@ -152,6 +152,8 @@ def genvcs(name, type, content, package=package, project=project, parent=parent,
         except KeyError:
             raise ResolveAPIError(resp['bugs'][0]['bugs'])
 
+    resp['result']['vcs'].sort(key=lambda vc: vc['lineNum'])
+
     # return vcs
     return resp['result']
 

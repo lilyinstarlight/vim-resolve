@@ -4,6 +4,22 @@ vim-resolve
 A complete syntax, compilation, and verification plugin for the RESOLVE language for Neovim. In addition to faculties for having Neovim/Vim parse and indent RESOLVE files, it includes a Neovim plugin that asynchronously contacts [https://resolve.cs.clemson.edu/](https://resolve.cs.clemson.edu/) and populates Neovim with related content via the commands below.
 
 
+Installation
+============
+
+From your terminal, install python-neovim and websocket-client.
+
+```sh
+pip3 install neovim websocket-client
+```
+
+From Neovim, update remote plugins.
+
+```vim
+:UpdateRemotePlugins
+```
+
+
 Commands
 ========
 
